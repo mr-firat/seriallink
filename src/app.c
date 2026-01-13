@@ -188,6 +188,7 @@ Return_t write_loop(config_t *conf, uint8_t *write_buffer)
                 break;
             }
             LOG("Frame %d sent. \n", i);
+            usleep(1000*1000); //1sec
         }
         
     }

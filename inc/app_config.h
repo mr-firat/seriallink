@@ -4,6 +4,6 @@
 #include "frame.h"
 
 extern frame_t test_frames[];
-int number_of_frames;
+extern int number_of_frames;
 
 #endif
