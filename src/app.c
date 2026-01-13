@@ -307,7 +307,7 @@ void *read_loop(void *args)
                         break;
                 }
             }
-            
+            usleep(SLEEP_US*100);
         }else if(read_bytes == 0){
             LOG("Nothing to receive.\n");
             break;
