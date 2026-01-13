@@ -41,13 +41,16 @@ socat -d -d PTY,raw,echo=0 PTY,raw,echo=0
 
 ### 2.2 Hardware Testing (Raspberry Pi Zero 2W)
 
-I have tested with 2 raspberry zero 2w devices. The Tx and Rx are crossed.
+I have tested with 2 raspberry zero 2w devices. The Tx and Rx lines are crossed.
 
 | Raspberry Pi Zero 2W | Raspberry Pi Zero 2W |
 | -------------------- | ---------------------|
 | GPIO14 (TXD)         | GPIO15 (RXD)         |
 | GPIO15 (RXD)         | GPIO14 (TXD)         |
 | GND                  | GND                  |
+
+![Raspberry UART Connections ](img/raspi_uart.jpeg "UART Connection")
+
 
 #### 2.2.1 Disable Serial Console
 
