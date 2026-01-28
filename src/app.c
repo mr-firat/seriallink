@@ -18,7 +18,7 @@
 #define SLEEP_US 1000   // 1 ms 
 
 //For signaling consumer thread.
-volatile int signal = 1;
+volatile bool_t signal_event = TRUE;
 
 static uint64_t now_ms(void)
 {
@@ -97,10 +97,10 @@ Return_t parse_arguments(config_t *conf, int argc, char** argv)
                 rb_init(conf->rx_queue, policy);
             }break;
             case 'e':{
-                conf->inject_error = true;
+                conf->inject_error = TRUE;
             }   break;
             case 'v':{
-                conf->verbose = true;
+                conf->verbose = TRUE;
             }   break;
             case 'h':{
                 print_help();
@@ -316,7 +316,7 @@ void *read_loop(void *args)
             {
                 if (now_ms() - last_rx > IDLE_TIMEOUT_MS) {
                     printf("TIMEOUT No more frames will be received, exiting\n");
-                    signal = 0;
+                    signal_event = 0;
                     pthread_cond_signal(&conf->rx_queue->not_empty);
                     break;
                 }
@@ -344,9 +344,9 @@ void *frame_consumer_thread(void *arg)
     ring_buffer_t *rb = (ring_buffer_t *)arg;
     frame_t frame;
     
-    while (signal) {
+    while (signal_event) {
         
-        if (rb_pop_blocking(rb, &frame, &signal) != 0){
+        if (rb_pop_blocking(rb, &frame, &signal_event) != 0){
             
             break;
         }
@@ -377,8 +377,8 @@ int main(int argc, char **argv)
         .state = IDLE,
         .rx_queue = NULL,
         .random_payload = 0,
-        .inject_error = false,
-        .verbose = false
+        .inject_error = FALSE,
+        .verbose = FALSE
     };
     
     uint8_t *read_buffer = (uint8_t *)calloc(FRAME_LEN, sizeof(uint8_t));

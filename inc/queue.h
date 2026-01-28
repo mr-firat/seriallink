@@ -31,6 +31,6 @@ void rb_get_stats(ring_buffer_t *rb, unsigned *dropped);
 void rb_init(ring_buffer_t *rb, rb_policy_t policy);
 int rb_push(ring_buffer_t *rb, const frame_t *frame);
 int rb_pop(ring_buffer_t *rb, frame_t *out);
-int rb_pop_blocking(ring_buffer_t *rb, frame_t *out, volatile int *signal);
+int rb_pop_blocking(ring_buffer_t *rb, frame_t *out, volatile bool_t *signal_event);
 
 #endif

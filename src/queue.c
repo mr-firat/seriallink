@@ -53,12 +53,12 @@ int rb_push(ring_buffer_t *rb, const frame_t *frame)
     return 0;
 }
 
-int rb_pop_blocking(ring_buffer_t *rb, frame_t *out, volatile int *signal)
+int rb_pop_blocking(ring_buffer_t *rb, frame_t *out, volatile bool_t *signal_event)
 {
     pthread_mutex_lock(&rb->mutex);
     
     while (rb->count == 0) {
-        if (!*signal) {                         //exit on signal event
+        if (!*signal_event) {                         //exit on signal event
             pthread_mutex_unlock(&rb->mutex);
             return -1;  
         }

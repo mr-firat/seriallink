@@ -32,7 +32,7 @@ typedef struct
     subcmd_t subcmd;                             
     uint32_t header_crc;                        
     uint32_t payload_crc;
-}header_t;
+} __attribute__((packed)) header_t;
 
 typedef struct {
     header_t header;

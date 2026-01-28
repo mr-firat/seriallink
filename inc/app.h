@@ -15,8 +15,8 @@ typedef struct{
     RX_State_t state;
     ring_buffer_t *rx_queue;
     int random_payload;
-    bool inject_error;
-    bool verbose;
+    bool_t inject_error;
+    bool_t verbose;
 }config_t;
 
 typedef struct {

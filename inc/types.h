@@ -3,9 +3,9 @@
 
 
 typedef enum{
-    false = 0,
-    true  = 1
-}bool;
+    FALSE = 0,
+    TRUE  = 1
+}bool_t;
 
 
 typedef enum{
